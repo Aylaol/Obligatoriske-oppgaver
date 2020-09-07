@@ -8,9 +8,9 @@
             var yearLgd = yearLengde(dato);
             var d30 = day30(dato);
             var d31 = day31(dato);
-            
+            var feb = februar(dato);
 
-            if ((tallLgd == true) && (punktPos == true) && (yearLgd == true) && (monthLgd == true) &&  (dayLgd == true) ) {
+            if ((tallLgd == true) && (punktPos == true) && (yearLgd == true) && (monthLgd == true) &&  (dayLgd == true) && (leap == true) && (d30 == true) && (d31 == true) && (feb == true)) {
                 return true;
             }
             else {
@@ -67,6 +67,9 @@
             else if (day31(dato)) {
                 return true;
             }
+            else if (februar(dato)) {
+                return true;
+            }
             else if (isLeapYear(dato)) {
                 return true;
             }
@@ -97,6 +100,16 @@
             }
         }
 
+        function februar(dato) {
+            var month = dato.slice(3, 5);
+            var day = dato.slice(0, 2);
+            if (month = '02' && day >= '01' && day <= '29') {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
      
         function isLeapYear(dato) {
             var year = dato.slice(6, 10);
