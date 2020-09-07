@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Unit Test</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="obligatorisk1.1.js"></script>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script>
+
+        QUnit.test("isDateValid", function (assert) {
+            const isValid = isDateValid('03.02.2020');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Lengden er ikke 10", function (assert) {
+            const isValid = isDateValid('03.02.20201');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Punktum er ikke i rett posisjon", function (assert) {
+            const isValid = isDateValid('03002.2020');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Året består ikke av fire siffer", function (assert) {
+            const isValid = isDateValid('03.02.202');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Måned består ikke av to siffer", function (assert) {
+            const isValid = isDateValid('03.2.2020');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Måned utenfor 1-12", function (assert) {
+            const isValid = isDateValid('03.13.2020');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Dag er større enn 31", function (assert) {
+            const isValid = isDateValid('32.02.2020');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Dag 31 for måned uten 31 dager", function (assert) {
+            const isValid = isDateValid('31.04.2020');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Dag 30 i februar", function (assert) {
+            const isValid = isDateValid('30.02.2020');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Dag 29 ikke skuddår", function (assert) {
+            const isValid = isDateValid('29.02.2021');
+            assert.equal(isValid, true);
+        });
+
+        QUnit.test("Dag 29 i skuddår", function (assert) {
+            const isValid = isDateValid('29.02.2020');
+            assert.equal(isValid, true);
+        });
+    </script>
+</body>
+</html >
