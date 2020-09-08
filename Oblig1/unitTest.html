@@ -21,47 +21,47 @@
 
         QUnit.test("Lengden er ikke 10", function (assert) {
             const isValid = isDateValid('03.02.20201');
-            assert.equal(isValid, true);
+            assert.equal(isValid, false);
         });
 
         QUnit.test("Punktum er ikke i rett posisjon", function (assert) {
             const isValid = isDateValid('03002.2020');
-            assert.equal(isValid, true);
+            assert.equal(isValid, false);
         });
 
         QUnit.test("Året består ikke av fire siffer", function (assert) {
             const isValid = isDateValid('03.02.202');
-            assert.equal(isValid, true);
+            assert.equal(isValid, false);
         });
 
         QUnit.test("Måned består ikke av to siffer", function (assert) {
             const isValid = isDateValid('03.2.2020');
-            assert.equal(isValid, true);
+            assert.equal(isValid, false);
         });
 
         QUnit.test("Måned utenfor 1-12", function (assert) {
             const isValid = isDateValid('03.13.2020');
-            assert.equal(isValid, true);
+            assert.equal(isValid, false);
         });
 
         QUnit.test("Dag er større enn 31", function (assert) {
             const isValid = isDateValid('32.02.2020');
-            assert.equal(isValid, true);
+            assert.equal(isValid, false);
         });
 
         QUnit.test("Dag 31 for måned uten 31 dager", function (assert) {
             const isValid = isDateValid('31.04.2020');
-            assert.equal(isValid, true);
+            assert.equal(isValid, false);
         });
 
         QUnit.test("Dag 30 i februar", function (assert) {
             const isValid = isDateValid('30.02.2020');
-            assert.equal(isValid, true);
+            assert.equal(isValid, false);
         });
 
         QUnit.test("Dag 29 ikke skuddår", function (assert) {
             const isValid = isDateValid('29.02.2021');
-            assert.equal(isValid, true);
+            assert.equal(isValid, false);
         });
 
         QUnit.test("Dag 29 i skuddår", function (assert) {
