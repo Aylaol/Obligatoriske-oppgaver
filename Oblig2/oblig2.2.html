@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+
+    <style>
+    </style>
+</head>
+<body>
+    <div id="content">
+    
+    
+   </div>
+
+    <script>
+
+        // model
+        var contentDiv = document.getElementById('content');
+        let numbers = [7, 3, 1, 5, 8];
+        let chosenBar = null;
+        let inputValue; 
+        
+        
+        
+        // view
+        show();
+        function show() {
+            let svgInnerHtml = '';
+            for (let i = 0; i < numbers.length; i++) {
+                svgInnerHtml += createBar(numbers[i], i + 1);
+            
+            }
+            contentDiv.innerHTML = `
+                <svg id="chart" width="500" viewBox="0 0 80 60">
+                    ${svgInnerHtml}
+                </svg><br/>
+                Valgt stolpe: <i> ${chosenBar ? chosenBar : 'Ingen stolper valgt'} </i>
+                <br />
+                Verdi:
+                <input type="number" min="1" max="10" oninput="inputValue = this.value" />
+                <button onclick="add()">Legg til stolpe</button>
+               ${chosenBar > 0 ? '<button enabled onclick="changeChoice()">Endre valgt stolpe</button>' : '<button disabled>Endre valgt stolpe</button>'} <br />
+                ${chosenBar > 0 ? '<button enabled onclick="removeChoice()">Fjerne valgt stolpe</button>' : '<button disabled>Fjerne valgt stolpe</button>'}
+                `;
+        }
+
+        function createBar(number, barNo,) {
+            
+            const width = 8;
+            const spacing = 2;
+            let x = (barNo - 1) * (width + spacing);
+            let height = number * 10;
+            let y = 60 - height;
+            let color = calcColor(1, 10, barNo);
+            let barStyleSheet = chosenBar === barNo ? 'stroke: black' : '';
+            return `<rect onclick="stolpeValgt(${barNo})" width="${width}" height="${height}" 
+                                x="${x}" y="${y}" fill="${color}" style="${barStyleSheet}"></rect>`;
+        }
+
+        function calcColor(min, max, val) {
+            var minHue = 240, maxHue = 0;
+            var curPercent = (val - min) / (max - min);
+            var colString = "hsl(" + ((curPercent * (maxHue - minHue)) + minHue) + ",100%,50%)";
+            return colString;
+        }
+
+        // controller 
+
+        function stolpeValgt(barNo) {
+            chosenBar = barNo == chosenBar ? null : barNo;  
+            show(); 
+        }
+
+        function removeChoice() {
+            numbers.splice(chosenBar - 1, 1);
+            show();
+        }
+
+        function changeChoice() {
+            numbers.splice(chosenBar - 1, 1, inputValue);
+            if (inputValue > 10) {
+                return alert("Stolpe verdien kan kun være 10 eller lavere");
+            }
+            show();
+        }
+
+        function add() {
+            numbers.splice(chosenBar + 0, 0, inputValue);
+            if (inputValue > 10) {
+                return alert("stolpe verdien kan kun være 10 eller lavere");
+            }
+            show();
+        }
+        
+    </script>
+
+
+</body>
+</html>
