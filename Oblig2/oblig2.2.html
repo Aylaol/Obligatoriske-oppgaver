@@ -39,7 +39,7 @@
                 <br />
                 Verdi:
                 <input type="number" min="1" max="10" oninput="inputValue = this.value" />
-                <button onclick="add()">Legg til stolpe</button>
+                <button onclick="addChoice()">Legg til stolpe</button>
                ${chosenBar > 0 ? '<button enabled onclick="changeChoice()">Endre valgt stolpe</button>' : '<button disabled>Endre valgt stolpe</button>'} <br />
                 ${chosenBar > 0 ? '<button enabled onclick="removeChoice()">Fjerne valgt stolpe</button>' : '<button disabled>Fjerne valgt stolpe</button>'}
                 `;
@@ -65,36 +65,11 @@
             return colString;
         }
 
-        // controller 
+        
 
-        function stolpeValgt(barNo) {
-            chosenBar = barNo == chosenBar ? null : barNo;  
-            show(); 
-        }
-
-        function removeChoice() {
-            numbers.splice(chosenBar - 1, 1);
-            show();
-        }
-
-        function changeChoice() {
-            numbers.splice(chosenBar - 1, 1, inputValue);
-            if (inputValue > 10) {
-                return alert("Stolpe verdien kan kun være 10 eller lavere");
-            }
-            show();
-        }
-
-        function add() {
-            numbers.splice(chosenBar + 0, 0, inputValue);
-            if (inputValue > 10) {
-                return alert("stolpe verdien kan kun være 10 eller lavere");
-            }
-            show();
-        }
+        
         
     </script>
-
-
+    <script src="oblig2.js"></script>
 </body>
 </html>

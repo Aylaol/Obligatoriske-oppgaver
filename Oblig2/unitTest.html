@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Unit Test</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="oblig2.js"></script>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script>
+
+        var contentDiv = document.getElementById('content');
+        let numbers; // = [7, 3, 1, 5, 8];
+        let chosenBar; // = null;
+        let inputValue; 
+
+        function show() {
+        }
+
+        QUnit.test("Velg valgt stolpe", function (assert) {
+            numbers = [7, 3, 1, 5, 8];
+            chosenBar = 1;
+            stolpeValgt(1);
+            assert.equal(chosenBar, null);
+        });
+
+        QUnit.test("Velg en annen stolpe", function (assert) {
+            numbers = [7, 3, 1, 5, 8];
+            chosenBar = 1;
+            stolpeValgt(2);
+            assert.equal(chosenBar, 2);
+        });
+
+        QUnit.test("Slette en stolpe", function (assert) {
+            numbers = [7, 3, 1, 5, 8];
+            chosenBar = 1;
+            removeChoice();
+            assert.deepEqual(numbers, [ 3, 1, 5, 8]);
+
+        });
+
+        QUnit.test("Endre en stolpe", function (assert) {
+            numbers = [7, 3, 1, 5, 8];
+            chosenBar = 1;
+            inputValue = 2;
+            changeChoice(1);
+            assert.deepEqual(numbers,[2,3,1,5,8]);
+        });
+
+        QUnit.test("Legg til en stolpe", function (assert) {
+            numbers = [7, 3, 1, 5, 8];
+            inputValue = 2;
+            chosenBar = null;
+            addChoice()
+            assert.deepEqual(numbers, [2, 7, 3, 1, 5, 8]);
+        });
+
+      
+    </script>
+</body>
+</html>
