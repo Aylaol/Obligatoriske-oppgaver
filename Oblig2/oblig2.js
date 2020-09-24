@@ -17,7 +17,7 @@ function changeChoice() {
 }
 
 function addChoice() {
-    numbers.splice(chosenBar + 0, 0, inputValue);
+    numbers.push(inputValue);
     if (inputValue > 10) {
         return alert("Stolpe verdien kan kun være 10 eller lavere");
     }
